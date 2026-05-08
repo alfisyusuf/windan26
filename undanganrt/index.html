@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pertemuan RT - Bapak-bapak</title>
+    <style>
+        /* Konfigurasi untuk print */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e5e7eb;
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 1 Lembar A4 Landscape */
+        .kertas-a4 {
+            width: 297mm;
+            height: 210mm;
+            background: white;
+            display: flex;
+            flex-direction: row;
+            page-break-after: always;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 10mm auto;
+        }
+
+        @media print {
+            body { background-color: white; }
+            .kertas-a4 { margin: 0; box-shadow: none; }
+            img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+
+        /* Setengah A4 (A5 Portrait) */
+        .undangan-a5 {
+            width: 50%;
+            height: 100%;
+            /* PADDING DIPERKECIL AGAR BORDER LEBIH DEKAT KE TEPI KERTAS */
+            padding: 8mm; 
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Garis potong di tengah kertas */
+        .undangan-a5:first-child {
+            border-right: 1px dashed #ccc;
+        }
+
+        /* Border elegan double linen */
+        .border-elegan {
+            border: 4px double #1f2937;
+            outline: 1px solid #1f2937;
+            outline-offset: -8px;
+            height: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Kop Surat */
+        .kop-surat {
+            text-align: center;
+            border-bottom: 2px solid #1f2937;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .kop-surat h2, .kop-surat h3 { margin: 0; line-height: 1.2; }
+        .kop-surat h2 { font-size: 16pt; font-weight: bold; }
+        .kop-surat h3 { font-size: 12pt; font-weight: normal; }
+
+        /* Isi Surat */
+        .isi-surat {
+            font-size: 11pt;
+            line-height: 1.4;
+            flex-grow: 1;
+            color: #111;
+        }
+        .tujuan { margin-bottom: 12px; }
+        .nama-tujuan { font-weight: bold; font-size: 12pt;}
+        
+        .detail-acara table {
+            margin: 10px 0 10px 15px;
+            border-collapse: collapse;
+        }
+        .detail-acara td {
+            padding: 1px 10px 1px 0;
+            vertical-align: top;
+        }
+
+        /* AREA TANDA TANGAN DAN CAP */
+        .ttd-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            position: relative;
+            height: 120px;
+        }
+        
+        .ttd-box {
+            text-align: center;
+            width: 200px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .ttd-asli {
+            height: 60px;
+            width: auto;
+            margin-top: 5px;
+            margin-bottom: -5px;
+        }
+        
+        .ttd-nama {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 0;
+        }
+        
+        .cap-asli {
+            position: absolute;
+            height: 90px;
+            width: auto;
+            right: 130px;
+            top: 10px;
+            z-index: 1;
+            opacity: 0.9;
+            transform: rotate(-10deg); 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="print-area"></div>
+
+    <template id="template-undangan">
+        <div class="undangan-a5">
+            <div class="border-elegan">
+                
+                <div class="kop-surat">
+                    <h2>PENGURUS RT 02 RW 06</h2>
+                    <h3>KAMPUNG WINDAN, DESA GUMPANG</h3>
+                    <h3>KEC. KARTASURA, KAB. SUKOHARJO</h3>
+                </div>
+
+                <div class="isi-surat">
+                    <div class="tujuan">
+                        Kepada Yth.<br>
+                        Bapak/Ibu/Sdr/i:<br>
+                        <span class="nama-tujuan">[Nama Warga]</span><br>
+                        <span style="font-weight: normal;">(Khusus Bapak-bapak)</span><br>
+                        di Tempat
+                    </div>
+
+                    <p style="margin: 5px 0;"><i>Assalamu'alaikum Warahmatullahi Wabarakatuh,</i></p>
+                    
+                    <p style="margin: 5px 0;">Puji syukur kehadirat Allah SWT. Dalam rangka mempererat tali silaturahmi dan membahas program-program lingkungan, kami mengharap kehadiran Bapak-bapak pada acara <strong>Pertemuan Rutin RT</strong> yang akan dilaksanakan pada:</p>
+
+                    <div class="detail-acara">
+                        <table>
+                            <tr>
+                                <td>Hari, Tanggal</td>
+                                <td>:</td>
+                                <td><strong>Sabtu, 9 Mei 2026</strong></td> 
+                            </tr>
+                            <tr>
+                                <td>Waktu</td>
+                                <td>:</td>
+                                <td><strong>19.30 WIB</strong> - Selesai</td>
+                            </tr>
+                            <tr>
+                                <td>Tempat</td>
+                                <td>:</td>
+                                <td><strong>Rumah Bp Kamit</strong></td>
+                            }
+                            </table>
+                    </div>
+
+                    <p style="margin: 5px 0;">Demikian undangan ini kami sampaikan, atas kehadirannya kami ucapkan terima kasih.</p>
+
+                    <p style="margin: 5px 0;"><i>Wassalamu'alaikum Warahmatullahi Wabarakatuh.</i></p>
+                </div>
+
+                <div class="ttd-container">
+                    <img src="./caprt.webp" alt="Cap RT" class="cap-asli">
+                    
+                    <div class="ttd-box">
+                        Windan, 9 April 2026<br>
+                        Ketua RT 02 RW 06
+                        
+                        <br>
+                        <img src="./ttd.webp" alt="Tanda Tangan" class="ttd-asli">
+                        
+                        <div class="ttd-nama">Alfi Suryani Yusuf</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // DATA JSON KEPADA YTH (TETAP SAMA)
+        const dataWarga = [
+            { "nama": "Keluarga Bpk. Satimin" },
+            { "nama": "Keluarga Bpk. Eka Ari Setiawan" },
+            { "nama": "Keluarga Bpk. Warsito" },
+            { "nama": "Keluarga Bpk. Joko Suratno" },
+            { "nama": "Keluarga Bpk. Bambang Gunawan" },
+            { "nama": "Keluarga Bpk. Valentino Haris" },
+            { "nama": "Keluarga Bpk. Slamet Mulyono" },
+            { "nama": "Keluarga Bpk. Hadi Waluyo" },
+            { "nama": "Keluarga Bpk. Seno Suyamto" },
+            { "nama": "Keluarga Bpk. Pantoro C S" },
+            { "nama": "Keluarga Bpk. Lanjar Budi S" },
+            { "nama": "Keluarga Bpk. Janu S" },
+            { "nama": "Keluarga Bpk. Wahyudi" },
+            { "nama": "Keluarga Bpk. Adi S" },
+            { "nama": "Keluarga Bpk. Joko Hartono" },
+            { "nama": "Keluarga Bpk. Eko Nuri P" },
+            { "nama": "Keluarga Bpk. Rio Anggoro" },
+            { "nama": "Keluarga Bpk. Kamit" },
+            { "nama": "Keluarga Sdr. Dadi Rahayu" },
+            { "nama": "Keluarga Bpk. Joko Prasetyo" },
+            { "nama": "Keluarga Bpk. Suhardo" },
+            { "nama": "Keluarga Bpk. Angga Kurniawan Wibowo" },
+            { "nama": "Keluarga Bpk. Beni Irawan" },
+            { "nama": "Keluarga Bpk. Suparjo" },
+            { "nama": "Keluarga Bpk. Ari Budianto, ST" },
+            { "nama": "Keluarga Bpk. Kuros Agus P" },
+            { "nama": "Keluarga Bpk. Ahmad Joko P" },
+            { "nama": "Keluarga Bpk. Sukirno" },
+            { "nama": "Keluarga Bpk. Welas Wigyo" },
+            { "nama": "Keluarga Ibu Nunung Aprilia" },
+            { "nama": "Keluarga Bpk. Aji Nur Hendro" },
+            { "nama": "Keluarga Bpk. AX Suwardi" },
+            { "nama": "Keluarga Bpk. Mardoko" },
+            { "nama": "Keluarga Bpk. Seno Priyanto" },
+            { "nama": "Keluarga Bpk. Sri Suyanto" },
+            { "nama": "Keluarga Bpk. Suwarno" },
+            { "nama": "Keluarga Bpk. Suparmin" },
+            { "nama": "Keluarga Bpk. Ngatirin" },
+            { "nama": "Keluarga Sdr. Endro" },
+            { "nama": "Keluarga Bpk. Sartono" },
+            { "nama": "Keluarga Bpk. Areka" },
+            { "nama": "Keluarga Bpk. Heri Widodo" },
+            { "nama": "Keluarga Bpk. Slamet Widodo" },
+            { "nama": "Keluarga Bpk. Joko Siswanto" },
+            { "nama": "Keluarga Bpk. Jaka Sungkawa" },
+            { "nama": "Keluarga Bpk. Margono, SKM, MM" },
+            { "nama": "Keluarga Bpk. Dega" },
+            { "nama": "Keluarga Bpk. Iwan Sasmiyanto" },
+            { "nama": "Keluarga Bpk. Taufik" },
+            { "nama": "Keluarga Bpk. Dwi Narkuntho" },
+            { "nama": "Keluarga Bpk. Sugi Cipto S" },
+            { "nama": "Keluarga Bpk. Agus Sugi Yanto" },
+            { "nama": "Keluarga Bpk. Triyono" },
+            { "nama": "Keluarga Bpk. Ari Wahyudi" },
+            { "nama": "Keluarga Bpk. Sunardi Prapto Diharjo" },
+            { "nama": "Keluarga Bpk. M Yulinawan" },
+            { "nama": "Keluarga Bpk. Hariyanto Harjo W" },
+            { "nama": "Keluarga Bpk. Agus Darmawan" },
+            { "nama": "Keluarga Bpk. Imam Budianto" },
+            { "nama": "Keluarga Bpk. Sendi Widianto" },
+            { "nama": "Keluarga Bpk. Trio Rahmanto" },
+            { "nama": "Keluarga Bpk. Eko Narkunthi" },
+            { "nama": "Keluarga Bpk. Budi Prakoso" },
+            { "nama": "Keluarga Bpk. Surojo" },
+            { "nama": "Keluarga Bpk. Alfi Suryani Yusuf" },
+            { "nama": "Keluarga Bpk. Joko Pramono" },
+            { "nama": "Keluarga Bpk. Gatot" },
+            { "nama": "Keluarga Bpk. Margono Citro" },
+            { "nama": "Keluarga Bpk. Supriyanto" },
+            { "nama": "Keluarga Bpk. Sulaiman" },
+            { "nama": "Keluarga Bpk. Yayang" },
+            { "nama": "Keluarga Bpk. Sabari" },
+            { "nama": "Keluarga Bpk. Pujiyanto" },
+            { "nama": "Keluarga Bpk. Arif S" },
+            { "nama": "Keluarga Bpk. M Abdul Mukti" },
+            { "nama": "Keluarga Bpk. Purwanto" },
+            { "nama": "Keluarga Bpk. Jumanto" },
+            { "nama": "Keluarga Bpk. Yunan B" },
+            { "nama": "Keluarga Bpk. Agus S/ Listi" },
+            { "nama": "Keluarga Bpk. Khaerul Anam" },
+            { "nama": "Keluarga Bpk. Eddy Surastyo" },
+            { "nama": "Keluarga Bpk. Abdurrahman Fidaulhaq Alhazmiy" },
+            { "nama": "Keluarga Bpk. Heri Budi Santoso" },
+            { "nama": "Keluarga Ibu Legiyati" },
+            { "nama": "Keluarga Ibu Suparti Amat Mutaqin" },
+            { "nama": "Keluarga Bpk. Hengki Deppriyansyah" },
+            { "nama": "Keluarga Bpk. Widayat Susanto" },
+            { "nama": "Ketua RT 3 RW 6" },
+            { "nama": "Bpk. Danang Anggara" },
+            { "nama": "Bpk. Sukarno" },
+            { "nama": "Keluarga ............................" },
+            { "nama": "Keluarga ............................" },
+            { "nama": "Keluarga ............................" },
+            { "nama": "Keluarga ............................" },
+            { "nama": "Keluarga ............................" },
+            { "nama": "Keluarga ............................" },
+            { "nama": "Keluarga ............................" },
+            { "nama": "Keluarga ............................" },
+            { "nama": "Keluarga ............................" },
+            { "nama": "Keluarga ............................" }
+        ];
+
+        const printArea = document.getElementById('print-area');
+        const template = document.getElementById('template-undangan').content;
+
+        let halamanA4;
+
+        dataWarga.forEach((warga, index) => {
+            if (index % 2 === 0) {
+                halamanA4 = document.createElement('div');
+                halamanA4.className = 'kertas-a4';
+                printArea.appendChild(halamanA4);
+            }
+
+            const clone = document.importNode(template, true);
+            clone.querySelector('.nama-tujuan').textContent = warga.nama;
+            halamanA4.appendChild(clone);
+        });
+    </script>
+
+</body>
+</html>
