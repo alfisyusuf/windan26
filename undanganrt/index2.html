@@ -59,42 +59,41 @@
             outline: 1px solid #1f2937;
             outline-offset: -8px;
             height: 100%;
-            /* PADDING DIKURANGI AGAR KONTEN PUNYA RUANG LEBIH BANYAK */
-            padding: 15px; 
+            padding: 20px;
             box-sizing: border-box;
             position: relative;
             display: flex;
             flex-direction: column;
         }
 
-        /* Kop Surat */
+        /* Kop Surat - Diperbesar */
         .kop-surat {
             text-align: center;
             border-bottom: 3px solid #000;
-            padding-bottom: 6px; /* Disesuaikan */
-            margin-bottom: 10px; /* Disesuaikan */
+            padding-bottom: 8px;
+            margin-bottom: 15px;
         }
         .kop-surat h2, .kop-surat h3 { margin: 0; line-height: 1.2; color: #000; }
-        .kop-surat h2 { font-size: 17pt; font-weight: bold; }
-        .kop-surat h3 { font-size: 13pt; font-weight: normal; }
+        .kop-surat h2 { font-size: 18pt; font-weight: bold; }
+        .kop-surat h3 { font-size: 14pt; font-weight: normal; }
 
-        /* Isi Surat */
+        /* Isi Surat - Ukuran Font Diperbesar untuk Keterbacaan Lansia */
         .isi-surat {
-            font-size: 12.5pt; /* Tetap besar, namun disesuaikan sedikit */
-            line-height: 1.4; /* Jarak baris sedikit diketatkan */
+            font-size: 13pt; /* Diperbesar dari 11pt */
+            line-height: 1.5; /* Jarak antar baris lebih longgar */
             flex-grow: 1;
-            color: #000; 
+            color: #000; /* Hitam pekat agar lebih jelas */
         }
-        .tujuan { margin-bottom: 10px; }
-        .nama-tujuan { font-weight: bold; font-size: 14pt;}
+        .tujuan { margin-bottom: 15px; }
+        .nama-tujuan { font-weight: bold; font-size: 15pt;} /* Nama tujuan lebih mencolok */
         
         .detail-acara table {
-            margin: 5px 0 5px 15px; /* Margin tabel dikurangi */
+            margin: 10px 0 10px 15px;
             border-collapse: collapse;
-            font-size: 12.5pt; 
+            font-size: 13pt; /* Ukuran teks di dalam tabel ikut membesar */
         }
         .detail-acara td {
-            padding: 3px 10px 3px 0;
+            padding: 4px 10px 4px 0; /* Jarak antar baris tabel lebih longgar */
             vertical-align: top;
         }
 
@@ -102,22 +101,23 @@
         .ttd-container {
             display: flex;
             justify-content: flex-end;
-            margin-top: 5px; /* Dikurangi agar tidak nabrak bawah */
+            margin-top: 15px;
             position: relative;
+            height: 140px; /* Tinggi disesuaikan untuk cap yang lebih besar */
         }
         
         .ttd-box {
             text-align: center;
-            width: 220px; 
+            width: 220px; /* Diperlebar agar teks tanggal aman */
             position: relative;
             z-index: 2;
-            font-size: 12pt; 
+            font-size: 12pt; /* Teks ttd sedikit diperbesar */
         }
         
         .ttd-asli {
             height: 70px;
             width: auto;
-            margin-top: 2px;
+            margin-top: 5px;
             margin-bottom: -5px;
         }
         
@@ -130,12 +130,12 @@
         
         .cap-asli {
             position: absolute;
-            height: 130px; /* Tetap besar */
+            height: 140px; /* UKURAN CAP DIPERBESAR SIGNIFIKAN dari 90px */
             width: auto;
-            right: 120px; 
-            top: -30px; /* Dinaikkan ke atas agar overlap dengan teks, bukan mendorong container ke bawah */
+            right: 120px; /* Posisi disesuaikan ulang */
+            top: -15px; /* Sedikit dinaikkan agar pas dengan ttd */
             z-index: 1;
-            opacity: 0.85; 
+            opacity: 0.85; /* Sedikit transparan agar ttd dan teks tetap terbaca */
             transform: rotate(-10deg); 
         }
     </style>
@@ -162,7 +162,7 @@
                         di Tempat
                     </div>
 
-                    <p style="margin: 6px 0;"><i>Assalamu'alaikum Warahmatullahi Wabarakatuh,</i></p>
+                    <p style="margin: 8px 0;"><i>Assalamu'alaikum Warahmatullahi Wabarakatuh,</i></p>
                     
                     <p style="margin: 8px 0;">Puji syukur kehadirat Allah SWT. Sholawat dan salam kita haturkan kepada Baginda Muhammad SAW. Bersama dengan surat ini kami mengundang Anda pada acara <strong>Pertemuan Rutin RT</strong> yang akan dilaksanakan pada:</p>
 
@@ -186,9 +186,9 @@
                         </table>
                     </div>
 
-                    <p style="margin: 6px 0;">Demikian undangan ini kami sampaikan, atas kehadirannya kami ucapkan terima kasih.</p>
+                    <p style="margin: 8px 0;">Demikian undangan ini kami sampaikan, atas kehadirannya kami ucapkan terima kasih.</p>
 
-                    <p style="margin: 6px 0;"><i>Wassalamu'alaikum Warahmatullahi Wabarakatuh.</i></p>
+                    <p style="margin: 8px 0;"><i>Wassalamu'alaikum Warahmatullahi Wabarakatuh.</i></p>
                 </div>
 
                 <div class="ttd-container">
