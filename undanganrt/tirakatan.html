@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Malam Tirakatan - Keluarga</title>
+    <style>
+        /* Konfigurasi untuk print */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #e5e7eb;
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 1 Lembar A4 Landscape */
+        .kertas-a4 {
+            width: 297mm;
+            height: 210mm;
+            background: white;
+            display: flex;
+            flex-direction: row;
+            page-break-after: always;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 10mm auto;
+        }
+
+        @media print {
+            body { background-color: white; }
+            .kertas-a4 { margin: 0; box-shadow: none; }
+            img { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+
+        /* Setengah A4 (A5 Portrait) */
+        .undangan-a5 {
+            width: 50%;
+            height: 100%;
+            padding: 8mm; 
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Garis potong di tengah kertas */
+        .undangan-a5:first-child {
+            border-right: 1px dashed #ccc;
+        }
+
+        /* Border elegan double linen */
+        .border-elegan {
+            border: 4px double #1f2937;
+            outline: 1px solid #1f2937;
+            outline-offset: -8px;
+            height: 100%;
+            padding: 15px; 
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Kop Surat */
+        .kop-surat {
+            text-align: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 6px; 
+            margin-bottom: 10px; 
+        }
+        .kop-surat h2, .kop-surat h3 { margin: 0; line-height: 1.2; color: #000; }
+        .kop-surat h2 { font-size: 17pt; font-weight: bold; }
+        .kop-surat h3 { font-size: 13pt; font-weight: normal; }
+
+        /* Isi Surat */
+        .isi-surat {
+            font-size: 12.5pt; 
+            line-height: 1.4; 
+            flex-grow: 1;
+            color: #000; 
+        }
+        .tujuan { margin-bottom: 10px; }
+        .nama-tujuan { font-weight: bold; font-size: 14pt;}
+        
+        .detail-acara table {
+            margin: 5px 0 5px 15px; 
+            border-collapse: collapse;
+            font-size: 12.5pt; 
+        }
+        .detail-acara td {
+            padding: 3px 10px 3px 0;
+            vertical-align: top;
+        }
+
+        /* AREA TANDA TANGAN DAN CAP */
+        .ttd-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 5px; 
+            position: relative;
+        }
+        
+        .ttd-box {
+            text-align: center;
+            width: 220px; 
+            position: relative;
+            z-index: 2;
+            font-size: 12pt; 
+        }
+        
+        .ttd-asli {
+            height: 70px;
+            width: auto;
+            margin-top: 2px;
+            margin-bottom: -5px;
+        }
+        
+        .ttd-nama {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 0;
+            font-size: 13pt;
+        }
+        
+        .cap-asli {
+            position: absolute;
+            height: 130px; 
+            width: auto;
+            right: 120px; 
+            top: -30px; 
+            z-index: 1;
+            opacity: 0.85; 
+            transform: rotate(-10deg); 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="print-area"></div>
+
+    <template id="template-undangan">
+        <div class="undangan-a5">
+            <div class="border-elegan">
+                
+                <div class="kop-surat">
+                    <h2>PENGURUS RT 02 RW 06</h2>
+                    <h3>KAMPUNG WINDAN, DESA GUMPANG</h3>
+                    <h3>KEC. KARTASURA, KAB. SUKOHARJO</h3>
+                </div>
+
+                <div class="isi-surat">
+                    <div class="tujuan">
+                        Kepada Yth.<br>
+                        Keluarga Bapak/Ibu/Sdr/i:<br>
+                        <span class="nama-tujuan">[Nama Warga]</span><br>
+                        di Tempat
+                    </div>
+
+                    <p style="margin: 6px 0;"><i>Assalamu'alaikum Warahmatullahi Wabarakatuh,</i></p>
+                    
+                    <p style="margin: 8px 0;">Puji syukur kehadirat Allah SWT. Sholawat dan salam kita haturkan kepada Baginda Muhammad SAW. Bersama dengan surat ini kami mengundang Bapak/Ibu beserta keluarga pada acara <strong>Malam Tirakatan HUT Kemerdekaan RI</strong> yang akan dilaksanakan pada:</p>
+
+                    <div class="detail-acara">
+                        <table>
+                            <tr>
+                                <td>Hari, Tanggal</td>
+                                <td>:</td>
+                                <td><strong>Minggu, 16 Agustus 2026</strong></td> 
+                            </tr>
+                            <tr>
+                                <td>Waktu</td>
+                                <td>:</td>
+                                <td><strong>19.30 WIB</strong> - Selesai</td>
+                            </tr>
+                            <tr>
+                                <td>Tempat</td>
+                                <td>:</td>
+                                <td><strong>Utara Area IPAL</strong></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <p style="margin: 6px 0;">Demikian undangan ini kami sampaikan, atas kehadiran dan partisipasinya kami ucapkan terima kasih.</p>
+
+                    <p style="margin: 6px 0;"><i>Wassalamu'alaikum Warahmatullahi Wabarakatuh.</i></p>
+                </div>
+
+                <div class="ttd-container">
+                    <img src="./caprt.webp" alt="Cap RT" class="cap-asli">
+                    
+                    <div class="ttd-box">
+                        Windan, 13 Agustus 2026<br>
+                        Ketua RT 02 RW 06
+                        
+                        <br>
+                        <img src="./ttd.webp" alt="Tanda Tangan" class="ttd-asli">
+                        
+                        <div class="ttd-nama">Alfi Suryani Yusuf</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </template>
+
+    <script>
+        // DATA JSON KEPADA YTH
+        const dataWarga = [
+            { "nama": "Bpk. Satimin" },
+            { "nama": "Bpk. Eka Ari Setiawan" },
+            { "nama": "Bpk. Warsito" },
+            { "nama": "Bpk. Joko Suratno" },
+            { "nama": "Bpk. Bambang Gunawan" },
+            { "nama": "Bpk. Valentino Haris" },
+            { "nama": "Bpk. Slamet Mulyono" },
+            { "nama": "Bpk. Hadi Waluyo" },
+            { "nama": "Bpk. Seno Suyamto" },
+            { "nama": "Bpk. Pantoro C S" },
+            { "nama": "Bpk. Lanjar Budi S" },
+            { "nama": "Bpk. Janu S" },
+            { "nama": "Bpk. Wahyudi" },
+            { "nama": "Bpk. Adi S" },
+            { "nama": "Bpk. Joko Hartono" },
+            { "nama": "Bpk. Eko Nuri P" },
+            { "nama": "Bpk. Rio Anggoro" },
+            { "nama": "Bpk. Kamit" },
+            { "nama": "Sdr. Dadi Rahayu" },
+            { "nama": "Bpk. Joko Prasetyo" },
+            { "nama": "Bpk. Suhardo" },
+            { "nama": "Bpk. Angga Kurniawan Wibowo" },
+            { "nama": "Bpk. Beni Irawan" },
+            { "nama": "Bpk. Suparjo" },
+            { "nama": "Bpk. Ari Budianto, ST" },
+            { "nama": "Bpk. Kuros Agus P" },
+            { "nama": "Bpk. Ahmad Joko P" },
+            { "nama": "Bpk. Sukirno" },
+            { "nama": "Bpk. Welas Wigyo" },
+            { "nama": "Ibu Nunung Aprilia" },
+            { "nama": "Bpk. Aji Nur Hendro" },
+            { "nama": "Bpk. AX Suwardi" },
+            { "nama": "Bpk. Mardoko" },
+            { "nama": "Bpk. Seno Priyanto" },
+            { "nama": "Bpk. Sri Suyanto" },
+            { "nama": "Bpk. Suwarno" },
+            { "nama": "Bpk. Suparmin" },
+            { "nama": "Bpk. Ngatirin" },
+            { "nama": "Sdr. Endro" },
+            { "nama": "Bpk. Sartono" },
+            { "nama": "Bpk. Areka" },
+            { "nama": "Bpk. Heri Widodo" },
+            { "nama": "Bpk. Slamet Widodo" },
+            { "nama": "Bpk. Joko Siswanto" },
+            { "nama": "Bpk. Jaka Sungkawa" },
+            { "nama": "Bpk. Margono, SKM, MM" },
+            { "nama": "Bpk. Dega" },
+            { "nama": "Bpk. Iwan Sasmiyanto" },
+            { "nama": "Bpk. Taufik" },
+            { "nama": "Bpk. Dwi Narkuntho" },
+            { "nama": "Bpk. Sugi Cipto S" },
+            { "nama": "Bpk. Agus Sugi Yanto" },
+            { "nama": "Bpk. Triyono" },
+            { "nama": "Bpk. Ari Wahyudi" },
+            { "nama": "Bpk. Sunardi Prapto Diharjo" },
+            { "nama": "Bpk. M Yulinawan" },
+            { "nama": "Bpk. Hariyanto Harjo W" },
+            { "nama": "Bpk. Agus Darmawan" },
+            { "nama": "Bpk. Imam Budianto" },
+            { "nama": "Bpk. Sendi Widianto" },
+            { "nama": "Bpk. Trio Rahmanto" },
+            { "nama": "Bpk. Eko Narkunthi" },
+            { "nama": "Bpk. Budi Prakoso" },
+            { "nama": "Bpk. Surojo" },
+            { "nama": "Bpk. Alfi Suryani Yusuf" },
+            { "nama": "Bpk. Joko Pramono" },
+            { "nama": "Bpk. Gatot" },
+            { "nama": "Bpk. Margono Citro" },
+            { "nama": "Bpk. Supriyanto" },
+            { "nama": "Bpk. Sulaiman" },
+            { "nama": "Bpk. Yayang" },
+            { "nama": "Bpk. Sabari" },
+            { "nama": "Bpk. Pujiyanto" },
+            { "nama": "Bpk. Arif S" },
+            { "nama": "Bpk. M Abdul Mukti" },
+            { "nama": "Bpk. Purwanto" },
+            { "nama": "Bpk. Jumanto" },
+            { "nama": "Bpk. Yunan B" },
+            { "nama": "Bpk. Agus S/ Listi" },
+            { "nama": "Bpk. Khaerul Anam" },
+            { "nama": "Bpk. Eddy Surastyo" },
+            { "nama": "Bpk. Abdurrahman Fidaulhaq Alhazmiy" },
+            { "nama": "Bpk. Heri Budi Santoso" },
+            { "nama": "Ibu Legiyati" },
+            { "nama": "Ibu Suparti Amat Mutaqin" },
+            { "nama": "Bpk. Hengki Deppriyansyah" },
+            { "nama": "Bpk. Widayat Susanto" },
+            { "nama": "Ketua RT 3 RW 6" },
+            { "nama": "Bpk. Danang Anggara" },
+            { "nama": "Bpk. Sukarno" },
+            { "nama": "............................" },
+            { "nama": "............................" },
+            { "nama": "............................" },
+            { "nama": "............................" },
+            { "nama": "............................" },
+            { "nama": "............................" },
+            { "nama": "............................" },
+            { "nama": "............................" },
+            { "nama": "............................" },
+            { "nama": "............................" }
+        ];
+
+        const printArea = document.getElementById('print-area');
+        const template = document.getElementById('template-undangan').content;
+
+        let halamanA4;
+
+        dataWarga.forEach((warga, index) => {
+            if (index % 2 === 0) {
+                halamanA4 = document.createElement('div');
+                halamanA4.className = 'kertas-a4';
+                printArea.appendChild(halamanA4);
+            }
+
+            const clone = document.importNode(template, true);
+            clone.querySelector('.nama-tujuan').textContent = warga.nama;
+            halamanA4.appendChild(clone);
+        });
+    </script>
+
+</body>
+</html>
