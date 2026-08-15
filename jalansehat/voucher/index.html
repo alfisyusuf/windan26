@@ -9,32 +9,39 @@
         /* Pengaturan ukuran kertas A4 */
         @page { 
             size: A4; 
-            margin: 10mm; 
+            margin: 0; /* Margin ditangani oleh padding di dalam elemen halaman */
         }
         @media print {
             body { 
                 -webkit-print-color-adjust: exact; 
                 print-color-adjust: exact; 
-                background-color: white !important; 
+                background-color: transparent !important; 
             }
-            .print-hide { display: none; }
+            .print-hide { display: none !important; }
+            /* Memaksa pergantian halaman */
+            .page-break { page-break-after: always; break-after: page; }
+            /* Menghilangkan bayangan dan margin saat diprint */
+            .a4-page { box-shadow: none !important; margin: 0 !important; }
         }
-        /* Efek garis potong pinggir */
+        /* Efek garis potong (sobek) */
         .cut-line { 
-            border-right: 2px dashed #e2e8f0; 
+            border-right: 2px dashed #cbd5e1; 
         }
     </style>
 </head>
-<body class="bg-gray-200 font-sans flex flex-col items-center py-8 print:py-0 print:bg-white">
+<body class="bg-gray-200 font-sans flex flex-col items-center py-8 print:py-0">
     
-    <!-- Tombol Print (Sembunyi saat dicetak) -->
-    <button onclick="window.print()" class="print-hide mb-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded shadow-lg transition-colors">
-        🖨️ Cetak Voucher (A4)
-    </button>
+    <!-- Tombol Print -->
+    <div class="print-hide mb-6 text-center">
+        <button onclick="window.print()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition-colors text-lg">
+            🖨️ Cetak Voucher (A4)
+        </button>
+        <p class="text-sm text-gray-600 mt-2">Pastikan setelan margin di jendela print adalah <b>"None"</b> atau <b>"Minimum"</b>.</p>
+    </div>
 
-    <!-- Halaman A4 -->
-    <div class="w-[210mm] min-h-[297mm] bg-white p-6 grid grid-cols-2 gap-4 content-start shadow-xl print:shadow-none" id="voucher-container">
-        <!-- Voucher akan di-generate oleh script di bawah -->
+    <!-- Container Utama -->
+    <div id="voucher-container" class="flex flex-col gap-8 print:gap-0">
+        <!-- Halaman akan di-generate oleh script -->
     </div>
 
     <script>
@@ -59,46 +66,68 @@
         });
 
         const allVouchers = [...belanjaVouchers, ...makanVouchers];
+        const vouchersPerPage = 8; // Membatasi 8 voucher per halaman agar ukurannya besar
+        
+        let htmlContent = '';
 
-        // Looping untuk membuat elemen HTML voucher
-        allVouchers.forEach((v, index) => {
-            const voucherHTML = `
-                <div class="flex border-2 border-gray-300 rounded-xl overflow-hidden h-36 relative bg-white">
-                    <!-- Bagian Kiri (Pita) -->
-                    <div class="${v.color} w-10 flex flex-col justify-center items-center text-white cut-line relative">
-                        <span class="transform -rotate-90 text-[10px] font-bold tracking-[0.2em] w-32 text-center whitespace-nowrap">
-                            DIRGAHAYU RI
-                        </span>
-                        <!-- Aksen Lingkaran -->
-                        <div class="absolute -top-2 -right-2 w-4 h-4 bg-white rounded-full border border-gray-300"></div>
-                        <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-white rounded-full border border-gray-300"></div>
-                    </div>
-                    
-                    <!-- Bagian Kanan (Isi Voucher) -->
-                    <div class="flex-1 p-3 flex flex-col justify-between bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:10px_10px]">
-                        <div class="flex justify-between items-start">
-                            <div>
-                                <h3 class="font-black text-xl leading-none ${v.textColor}">VOUCHER ${v.type}</h3>
-                                <p class="text-xs text-gray-700 font-bold uppercase mt-1 tracking-wide">${v.venue}</p>
-                            </div>
-                            <span class="text-[10px] font-mono text-gray-400 font-bold">#${String(index + 1).padStart(3, '0')}</span>
-                        </div>
-                        
-                        <div class="text-center my-1">
-                            <span class="text-xl font-black text-gray-800 border-y-2 border-gray-300 px-6 py-1 inline-block bg-white shadow-sm rounded-md">
-                                ${v.value}
-                            </span>
-                        </div>
-                        
-                        <div class="text-[10px] text-gray-600 text-center leading-tight bg-white/80 p-1 rounded">
-                            <span class="font-bold text-red-600">Jalan Sehat 16 Agustus</span><br>
-                            Windan RT 2/6 Gumpang, Kartasura
-                        </div>
-                    </div>
-                </div>
+        for (let i = 0; i < allVouchers.length; i += vouchersPerPage) {
+            const pageVouchers = allVouchers.slice(i, i + vouchersPerPage);
+            
+            // Buka tag halaman A4
+            htmlContent += `
+            <div class="a4-page w-[210mm] h-[297mm] bg-white p-[15mm] shadow-xl mx-auto page-break box-border relative">
+                <div class="grid grid-cols-2 gap-6 h-full content-start">
             `;
-            container.innerHTML += voucherHTML;
-        });
+
+            // Isi voucher di halaman tersebut
+            pageVouchers.forEach((v, index) => {
+                const globalIndex = i + index + 1;
+                htmlContent += `
+                    <div class="flex border-2 border-gray-300 rounded-xl overflow-hidden h-40 relative bg-white shadow-sm">
+                        <!-- Bagian Kiri (Pita) -->
+                        <div class="${v.color} w-12 flex flex-col justify-center items-center text-white cut-line relative">
+                            <span class="transform -rotate-90 text-[11px] font-bold tracking-[0.25em] w-32 text-center whitespace-nowrap">
+                                DIRGAHAYU RI
+                            </span>
+                            <!-- Aksen Lingkaran (Bolongan Kertas) -->
+                            <div class="absolute -top-3 -right-3 w-6 h-6 bg-white rounded-full border border-gray-300"></div>
+                            <div class="absolute -bottom-3 -right-3 w-6 h-6 bg-white rounded-full border border-gray-300"></div>
+                        </div>
+                        
+                        <!-- Bagian Kanan (Isi Voucher) -->
+                        <div class="flex-1 p-4 flex flex-col justify-between bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:12px_12px]">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-black text-2xl leading-none ${v.textColor}">VOUCHER ${v.type}</h3>
+                                    <p class="text-sm text-gray-700 font-bold uppercase mt-1 tracking-wider">${v.venue}</p>
+                                </div>
+                                <span class="text-xs font-mono text-gray-400 font-bold bg-white px-2 py-1 rounded border border-gray-200 shadow-sm">
+                                    #${String(globalIndex).padStart(3, '0')}
+                                </span>
+                            </div>
+                            
+                            <div class="text-center my-2">
+                                <span class="text-2xl font-black text-gray-800 border-y-2 border-gray-400 px-6 py-2 inline-block bg-white shadow-sm rounded-md">
+                                    ${v.value}
+                                </span>
+                            </div>
+                            
+                            <div class="text-xs text-gray-600 text-center leading-relaxed bg-white/90 p-1.5 rounded font-medium border border-gray-100">
+                                <span class="font-bold text-red-600">Jalan Sehat 16 Agustus</span><br>
+                                Windan RT 2/6 Gumpang, Kartasura
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Tutup tag halaman
+            htmlContent += `
+                </div>
+            </div>`;
+        }
+
+        container.innerHTML = htmlContent;
     </script>
 </body>
 </html>
