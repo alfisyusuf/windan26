@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voucher Doorprize Jalan Sehat RT 2/6</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Pengaturan ukuran kertas A4 */
+        @page { 
+            size: A4; 
+            margin: 10mm; 
+        }
+        @media print {
+            body { 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+                background-color: white !important; 
+            }
+            .print-hide { display: none; }
+        }
+        /* Efek garis potong pinggir */
+        .cut-line { 
+            border-right: 2px dashed #e2e8f0; 
+        }
+    </style>
+</head>
+<body class="bg-gray-200 font-sans flex flex-col items-center py-8 print:py-0 print:bg-white">
+    
+    <!-- Tombol Print (Sembunyi saat dicetak) -->
+    <button onclick="window.print()" class="print-hide mb-6 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded shadow-lg transition-colors">
+        🖨️ Cetak Voucher (A4)
+    </button>
+
+    <!-- Halaman A4 -->
+    <div class="w-[210mm] min-h-[297mm] bg-white p-6 grid grid-cols-2 gap-4 content-start shadow-xl print:shadow-none" id="voucher-container">
+        <!-- Voucher akan di-generate oleh script di bawah -->
+    </div>
+
+    <script>
+        const container = document.getElementById('voucher-container');
+        
+        // Data 10 Voucher Mba Yanti
+        const belanjaVouchers = Array(10).fill({
+            type: 'BELANJA',
+            value: 'Rp 25.000',
+            venue: 'Warung Mba Yanti',
+            color: 'bg-red-600',
+            textColor: 'text-red-700'
+        });
+
+        // Data 3 Voucher Pak Sisur
+        const makanVouchers = Array(3).fill({
+            type: 'MAKAN',
+            value: '1 PORSI SPESIAL',
+            venue: 'Warung Pak Sisur',
+            color: 'bg-orange-600',
+            textColor: 'text-orange-700'
+        });
+
+        const allVouchers = [...belanjaVouchers, ...makanVouchers];
+
+        // Looping untuk membuat elemen HTML voucher
+        allVouchers.forEach((v, index) => {
+            const voucherHTML = `
+                <div class="flex border-2 border-gray-300 rounded-xl overflow-hidden h-36 relative bg-white">
+                    <!-- Bagian Kiri (Pita) -->
+                    <div class="${v.color} w-10 flex flex-col justify-center items-center text-white cut-line relative">
+                        <span class="transform -rotate-90 text-[10px] font-bold tracking-[0.2em] w-32 text-center whitespace-nowrap">
+                            DIRGAHAYU RI
+                        </span>
+                        <!-- Aksen Lingkaran -->
+                        <div class="absolute -top-2 -right-2 w-4 h-4 bg-white rounded-full border border-gray-300"></div>
+                        <div class="absolute -bottom-2 -right-2 w-4 h-4 bg-white rounded-full border border-gray-300"></div>
+                    </div>
+                    
+                    <!-- Bagian Kanan (Isi Voucher) -->
+                    <div class="flex-1 p-3 flex flex-col justify-between bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:10px_10px]">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="font-black text-xl leading-none ${v.textColor}">VOUCHER ${v.type}</h3>
+                                <p class="text-xs text-gray-700 font-bold uppercase mt-1 tracking-wide">${v.venue}</p>
+                            </div>
+                            <span class="text-[10px] font-mono text-gray-400 font-bold">#${String(index + 1).padStart(3, '0')}</span>
+                        </div>
+                        
+                        <div class="text-center my-1">
+                            <span class="text-xl font-black text-gray-800 border-y-2 border-gray-300 px-6 py-1 inline-block bg-white shadow-sm rounded-md">
+                                ${v.value}
+                            </span>
+                        </div>
+                        
+                        <div class="text-[10px] text-gray-600 text-center leading-tight bg-white/80 p-1 rounded">
+                            <span class="font-bold text-red-600">Jalan Sehat 16 Agustus</span><br>
+                            Windan RT 2/6 Gumpang, Kartasura
+                        </div>
+                    </div>
+                </div>
+            `;
+            container.innerHTML += voucherHTML;
+        });
+    </script>
+</body>
+</html>
