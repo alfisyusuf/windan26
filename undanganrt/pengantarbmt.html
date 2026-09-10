@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surat Pengantar Domisili Usaha - BMT Amanah Ummah</title>
+    <style>
+        /* Konfigurasi Tampilan Layar */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e5e7eb;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Konfigurasi Kertas A4 */
+        .kertas-a4 {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 25mm 20mm; /* Margin teks dalam kertas */
+            margin: 10mm auto;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* Konfigurasi Khusus Print */
+        @media print {
+            body {
+                background-color: transparent;
+            }
+            .kertas-a4 {
+                margin: 0;
+                box-shadow: none;
+                width: 100%;
+                padding: 25mm 20mm;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 0; /* Hilangkan margin default browser */
+            }
+        }
+
+        /* Kop Surat */
+        .kop-surat {
+            text-align: center;
+            border-bottom: 3px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        .kop-surat::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            border-bottom: 1px solid #000;
+        }
+        .kop-surat h2 {
+            margin: 0;
+            font-size: 16pt;
+            font-weight: bold;
+        }
+        .kop-surat h3 {
+            margin: 5px 0 0 0;
+            font-size: 14pt;
+            font-weight: normal;
+        }
+
+        /* Judul Surat */
+        .judul-surat {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .judul-surat h4 {
+            margin: 0;
+            font-size: 14pt;
+            text-decoration: underline;
+        }
+        .judul-surat p {
+            margin: 5px 0 0 0;
+            font-size: 12pt;
+        }
+
+        /* Isi Surat */
+        .isi-surat {
+            font-size: 12pt;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        .tabel-biodata {
+            width: 100%;
+            margin-left: 15px;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+        .tabel-biodata td {
+            vertical-align: top;
+            padding: 4px 0;
+        }
+        .tabel-biodata td:nth-child(1) { width: 30%; }
+        .tabel-biodata td:nth-child(2) { width: 3%; }
+        .tabel-biodata td:nth-child(3) { width: 67%; }
+
+        /* Bagian Tanda Tangan & Cap */
+        .ttd-container {
+            margin-top: 40px;
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+        }
+        .ttd-box {
+            text-align: center;
+            width: 250px;
+            font-size: 12pt;
+            position: relative;
+            z-index: 2;
+        }
+        .ttd-nama {
+            font-weight: bold;
+            text-decoration: underline;
+            margin-top: 0;
+        }
+        .ttd-asli {
+            height: 70px; /* Sesuaikan ukuran ttd */
+            width: auto;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .cap-asli {
+            position: absolute;
+            height: 120px; /* Sesuaikan ukuran cap */
+            width: auto;
+            right: 170px; /* Geser ke kiri dari ttd */
+            top: -20px;
+            z-index: 1;
+            opacity: 0.85; /* Efek tembus pandang layaknya tinta cap */
+            transform: rotate(-10deg); /* Miring sedikit biar natural */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="kertas-a4">
+        
+        <!-- KOP SURAT -->
+        <div class="kop-surat">
+            <h2>PENGURUS RT 02 RW 06</h2>
+            <h3>KAMPUNG WINDAN, DESA GUMPANG</h3>
+            <h3>KEC. KARTASURA, KAB. SUKOHARJO</h3>
+        </div>
+
+        <!-- JUDUL SURAT -->
+        <div class="judul-surat">
+            <h4>SURAT PENGANTAR DOMISILI USAHA</h4>
+            <p>Nomor: 015/RT.02/IX/2026</p>
+        </div>
+
+        <!-- ISI SURAT -->
+        <div class="isi-surat">
+            <p>Yang bertanda tangan di bawah ini Ketua RT 02 RW 06 Kampung Windan, Desa Gumpang, Kecamatan Kartasura, Kabupaten Sukoharjo, menerangkan dengan sesungguhnya bahwa:</p>
+            
+            <table class="tabel-biodata">
+                <tr><td>Nama</td><td>:</td><td><strong>Faisal Abdul Haris</strong></td></tr>
+                <tr><td>NIK</td><td>:</td><td>3311121509730001</td></tr>
+                <tr><td>Tempat/Tgl Lahir</td><td>:</td><td>Pemalang, 15-09-1973</td></tr>
+                <tr><td>Jenis Kelamin</td><td>:</td><td>Laki-Laki</td></tr>
+                <tr><td>Agama</td><td>:</td><td>Islam</td></tr>
+                <tr><td>Pekerjaan</td><td>:</td><td>Karyawan Swasta</td></tr>
+                <tr><td>Alamat</td><td>:</td><td>Dukuh RT 003/012, Kel. Makamhaji, Kec. Kartasura, Kab. Sukoharjo</td></tr>
+            </table>
+
+            <p>Orang tersebut di atas adalah benar penanggung jawab / Ketua Pengurus dari Badan Usaha:</p>
+            
+            <table class="tabel-biodata">
+                <tr><td>Nama Lembaga</td><td>:</td><td><strong>KSPPS BMT Amanah Ummah</strong></td></tr>
+                <tr><td>Nomor Induk Berusaha</td><td>:</td><td>0220300112206</td></tr>
+                <tr><td>Alamat Usaha</td><td>:</td><td>Jl. Slamet Riyadi No. 292, (Wilayah RT 02 RW 06 Windan)<br>Desa/Kelurahan Gumpang, Kec. Kartasura, Kab. Sukoharjo</td></tr>
+            </table>
+
+            <p>Surat pengantar ini diberikan kepada yang bersangkutan untuk keperluan melengkapi administrasi <strong>Pengurusan Surat Keterangan Domisili Usaha</strong> di Kelurahan/Desa Gumpang.</p>
+            
+            <p>Demikian surat pengantar ini dibuat dengan sebenarnya untuk dapat dipergunakan sebagaimana mestinya.</p>
+        </div>
+
+        <!-- TANDA TANGAN & CAP -->
+        <div class="ttd-container">
+            <!-- Panggil gambar cap dari folder yang sama -->
+            <img src="./caprt.webp" alt="Cap RT" class="cap-asli">
+            
+            <div class="ttd-box">
+                Windan, 10 September 2026<br>
+                Ketua RT 02 RW 06
+                
+                <br>
+                <!-- Panggil gambar Tanda Tangan dari folder yang sama -->
+                <img src="./ttd.webp" alt="Tanda Tangan" class="ttd-asli">
+                <br>
+                
+                <div class="ttd-nama">Alfi Suryani Yusuf</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
