@@ -19,7 +19,7 @@
         .kertas-a4 {
             width: 210mm;
             min-height: 297mm;
-            padding: 25mm 20mm; /* Margin teks dalam kertas */
+            padding: 15mm 20mm; /* MARGIN ATAS DAN BAWAH DIKURANGI MENJADI 15mm */
             margin: 10mm auto;
             background: white;
             box-shadow: 0 0 10px rgba(0,0,0,0.15);
@@ -36,7 +36,7 @@
                 margin: 0;
                 box-shadow: none;
                 width: 100%;
-                padding: 25mm 20mm;
+                padding: 15mm 20mm; /* Menyamakan margin saat di-print */
             }
             @page {
                 size: A4 portrait;
@@ -48,15 +48,15 @@
         .kop-surat {
             text-align: center;
             border-bottom: 3px solid #000;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
+            padding-bottom: 8px; /* Sedikit dikurangi */
+            margin-bottom: 15px; /* Sedikit dikurangi */
             position: relative;
         }
         .kop-surat::after {
             content: "";
             position: absolute;
             left: 0;
-            bottom: -5px;
+            bottom: -4px;
             width: 100%;
             border-bottom: 1px solid #000;
         }
@@ -66,7 +66,7 @@
             font-weight: bold;
         }
         .kop-surat h3 {
-            margin: 5px 0 0 0;
+            margin: 4px 0 0 0;
             font-size: 14pt;
             font-weight: normal;
         }
@@ -74,7 +74,7 @@
         /* Judul Surat */
         .judul-surat {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 15px; /* Sedikit dikurangi */
         }
         .judul-surat h4 {
             margin: 0;
@@ -89,20 +89,23 @@
         /* Isi Surat */
         .isi-surat {
             font-size: 12pt;
-            line-height: 1.5;
+            line-height: 1.4; /* Spasi antar baris sedikit dirapatkan agar muat */
             text-align: justify;
+        }
+        .isi-surat p {
+            margin: 8px 0; /* Spasi antar paragraf dikurangi */
         }
 
         .tabel-biodata {
             width: 100%;
             margin-left: 15px;
-            margin-bottom: 15px;
-            margin-top: 10px;
+            margin-bottom: 10px; /* Jarak bawah tabel dikurangi */
+            margin-top: 5px; /* Jarak atas tabel dikurangi */
             border-collapse: collapse;
         }
         .tabel-biodata td {
             vertical-align: top;
-            padding: 4px 0;
+            padding: 2px 0; /* Padding sel dikurangi */
         }
         .tabel-biodata td:nth-child(1) { width: 30%; }
         .tabel-biodata td:nth-child(2) { width: 3%; }
@@ -110,7 +113,7 @@
 
         /* Bagian Tanda Tangan & Cap */
         .ttd-container {
-            margin-top: 40px;
+            margin-top: 20px; /* Jarak atas ke TTD dikurangi */
             display: flex;
             justify-content: flex-end;
             position: relative;
