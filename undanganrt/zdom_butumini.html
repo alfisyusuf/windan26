@@ -129,19 +129,26 @@
             font-weight: bold;
             text-decoration: underline;
             margin-top: 0;
+            position: relative;
+            z-index: 3;
         }
         .ttd-asli {
-            height: 70px; 
+            height: 75px; 
             width: auto;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin-top: -5px;
+            /* Margin bawah negatif agar tanda tangan turun menyentuh nama */
+            margin-bottom: -20px; 
+            position: relative;
+            z-index: 2;
         }
         .cap-asli {
             position: absolute;
             height: 120px; 
             width: auto;
-            right: 170px; 
-            top: -20px;
+            /* Right dikurangi agar cap geser ke kanan menyentuh TTD */
+            right: 120px; 
+            /* Top ditambah agar cap turun sejajar dengan TTD */
+            top: 5px; 
             z-index: 1;
             opacity: 0.85; 
             transform: rotate(-10deg); 
